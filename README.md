@@ -112,4 +112,10 @@ http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
 Creative Commons, 171 Second Street, Suite 300, San Francisco, 
 California, 94105, USA.
 
+Since you have both a root user and your computer's password protected user, you might have to include -p when you are trying to import the sample database. Examples:
 
+    mysql -p < employees.sql 
+    Or
+    mysql -u root -p < employees.sql
+    For testing the tables
+    mysql -p -t < test_employees_md5.sql
