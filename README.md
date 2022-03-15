@@ -1,4 +1,24 @@
 # test_db
+## Notes / Exercise
+Since you have both a root user and your computer's password protected user, you might have to include -p when you are trying to import the sample database. Examples:
+
+    mysql -p < employees.sql 
+    Or
+    mysql -u root -p < employees.sql
+    For testing the tables
+    mysql -p -t < test_employees_md5.sql
+
+1. Select all from the employees tables. You should see 300,024 results returned.
+
+    
+    SHOW DATABASES;
+    USE employees;
+    SHOW TABLES;
+    pager less -~SFX
+    SELECT * FROM employees;
+    npager;
+
+<hr>
 A sample database with an integrated test suite, used to test your applications and database servers
 
 This repository was migrated from [Launchpad](https://launchpad.net/test-db).
@@ -112,10 +132,4 @@ http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
 Creative Commons, 171 Second Street, Suite 300, San Francisco, 
 California, 94105, USA.
 
-Since you have both a root user and your computer's password protected user, you might have to include -p when you are trying to import the sample database. Examples:
 
-    mysql -p < employees.sql 
-    Or
-    mysql -u root -p < employees.sql
-    For testing the tables
-    mysql -p -t < test_employees_md5.sql
