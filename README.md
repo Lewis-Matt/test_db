@@ -1,5 +1,5 @@
 # test_db
-## Notes / Exercise
+## Notes
 Since you have both a root user and your computer's password protected user, you might have to include -p when you are trying to import the sample database. Examples:
 
     mysql -p < employees.sql 
@@ -8,8 +8,61 @@ Since you have both a root user and your computer's password protected user, you
     For testing the tables
     mysql -p -t < test_employees_md5.sql
 
-1. Select all from the employees tables. You should see 300,024 results returned.
+### WHERE, LIKE, DISTINCT, BETWEEN, IN
+The WHERE clause, if given, indicates the condition or conditions that rows must satisfy to be selected. The WHERE condition is an expression that evaluates to true for each row to be selected.
 
+We can use WHERE with the LIKE option to find similarities. The % are wildcards.
+This query will select all first names with the letter combination 'sus':
+
+    SELECT DISTINCT first_name
+    FROM employees
+    WHERE first_name LIKE '%sus%';
+* Can add the DISTINCT keyword to our SELECT statement to avoid getting duplicate values.
+
+BETWEEN to find specific ranges of values:
+    
+    WHERE emp_no BETWEEN 10026 AND 10082;
+We can use WHERE with IN to query only very specific sets of values. The () are required when you use IN.
+
+    WHERE last_name IN ('Herber', 'Dredge', 'Lipner', 'Baek');
+
+We can also use comparison operators, IS NULL, IS NOT NULL.
+
+We can chain using AND or OR:
+
+    WHERE emp_no < 20000
+        AND last_name IN ('Herber','Baek')
+        OR first_name = 'Shridhar';
+
+
+<hr>
+
+### Setup Schema/DB
+
+1. Open the database tool window
+2. View -> Tool Windows -> Database
+3. Add a new connection
+4. Click on the '+' and choose Data Source -> MySQL
+5. Some versions of IntelliJ might require to specify the server version while you choose a driver, in your case could be something like: MySQL 8.x.x
+6. Fill in the following:
+
+
+    Host: localhost
+    Port: 3306
+    Database:
+    User: root
+    Password: codeup (or your root password)
+
+Note that you should leave the "Database" field blank so you can see them all.
+7. Under the Advanced tab, find the serverTimezone property and set it to UTC
+8. Click Test Connection and save if successful
+
+<hr>
+
+## Exercises
+
+### Exercise 1
+Select all from the employees tables. You should see 300,024 results returned.
     
     SHOW DATABASES;
     USE employees;
@@ -18,7 +71,23 @@ Since you have both a root user and your computer's password protected user, you
     SELECT * FROM employees;
     npager;
 
+### Exercise 2
+Expand the @localhost then expand employees_db
+
+You may need to click "Schemas..." to tell IntelliJ which databases you wish to work with on this project.
+
+Run describe departments; from the query window. Compare this to the data you see when you expand the departments table in the Database Tool Window.
+
+In the query window, craft a query that will show all the records in the departments table. You should see 9 rows returned in the view below.
+
+Explore the structure of each table.
+
+### Exercise 3
+
+
 <hr>
+
+# Description
 A sample database with an integrated test suite, used to test your applications and database servers
 
 This repository was migrated from [Launchpad](https://launchpad.net/test-db).
